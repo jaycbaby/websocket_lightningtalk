@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<div id="output"></div>
+
+
+
+<script>
+
+// Initialize WebSocket connection and event handlers
+function setup() {
+   ws = new WebSocket("ws://echo.websocket.org/echo");
+
+// Listen for the connection open event 
+   ws.onopen = function(e) {
+      log("Connected");
+   }
+// Listen for the close connection event
+   ws.onclose = function(e) {
+      log("Disconnected: " + e.reason);
+   }
+// Listen for connection errors
+   ws.onerror = function(e) {
+      log("Error ");
+   }
+// Listen for new messages arriving at the client
+   ws.onmessage = function(e) {
+      log("I agree. " + e.data + " too!");   
+} }
+// Send a message on the WebSocket.
+function sendMessage(msg){
+   ws.send(msg);
+      log("Message sent");
+}
+// Display logging information in the document.
+function log(s) {
+   var p = document.createElement("p");
+   p.style.wordWrap = "break-word";
+   p.textContent = s;
+   output.appendChild(p);
+   // Also log information on the javascript console
+   console.log(s);
+}
+// Start running the example.
+setup();
+</script>
+
+
+
+
+</html>
